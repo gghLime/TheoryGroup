@@ -1,47 +1,90 @@
-==**For OUC theory group only.**==
+[TOC]
+
+==**For theory and texture group only.**==
 
 为增加查阅体验与防止后续服务器内容的更改，请直接在github观看 https://github.com/OUCvisionLab/ServerGuide
 
-本次更新内容：
+19.11.08次更新内容：
 
-- 会让3个人左右共同使用和维护一台专属服务器（自己组的服务器自行解决），也留下了1台机动的服务器。
+- 会让2个人左右共同使用和维护一台专属服务器（自己组的服务器自行解决），也留下了1台机动的服务器。
 - 考虑到留学生，所以采用了中英结合的书写方式
-- 解释了一些虚拟环境、源、ssh，传文件的知识
+- 解释了一些虚拟环境、ssh，xftp等可能用到的知识
+- 如有跑实验需要，是可以临时调换的。
 
-[TOC]
 
-# 1、服务器列表Server list
+目录：
 
-| IP              | 端口号Port | capacity                                       | user name | password | Note          |
-| --------------- | ---------- | :--------------------------------------------- | --------- | -------- | ------------- |
-| 222.195.151.170 | 9013       | RAM:128G, CPU:2.3GHz*40, GPU:none              | ouc-13    | b301     | GPU:none      |
-| 222.195.151.170 | 9015       | RAM:128G, CPU:2.3GHz*40, GPU:TESLA K40c 11G *1 | ouc-15    | b301     | LY,ZTG        |
-| 222.195.151.170 | 9028       | RAM:32G, CPU:3.5GHz*8, GPU:1080Ti 11G *2       | ouc-28    | b301     | LJX,HF        |
-| 222.195.151.170 | 9029       | RAM:32G, CPU:3.5GHz*8, GPU:2080 8G *2          | ouc-29    | b301     | HF            |
-| 222.195.151.66  | 9010       | RAM:32G, CPU:3.3GHz*4, GPU:TITAN X 12G         | ouc-10    | b301     | Aman,Israel   |
-| 222.195.151.66  | 9018       | RAM:32G, CPU:3.5GHz*8, GPU:1080Ti 11G *2       | ouc-18    | b301     | ZQQ,LJH,Sadia |
-| 222.195.151.66  | 9019       | RAM:32G, CPU:3.5GHz*8, GPU:1080Ti 11G *2       | ouc-19    | b301     | SQY,SCX       |
+  - [1、Server-list](#1、Server-list)
+  - [2、login](#2、login)
+  - [3、python-and-tensorflow](#3、python-and-tensorflow)
+  - [4、transfer-files：Xftp](#4、transfer-files：Xftp)
+  - [5、UltraEdit](#5、查看文件、修改文件：UltraEdit)
+  - [6、Xshell](#6、命令行工具：Xshell)
+  - [7、重装系统](#7、重装系统（非常不建议）)
+  - [8、What's-more](#8、What's-more)
+
+
+
+
+
+!!!禁止在服务器上阅读代码与长时间修改代码，浪费资源。
+
+# 1、Server-list
+
+| IP              | 端口号Port | capacity                                       | user name | password | Note           |
+| --------------- | ---------- | :--------------------------------------------- | --------- | -------- | -------------- |
+| 222.195.151.170 | 9013       | RAM:128G, CPU:2.3GHz*40, GPU:none              | ouc-13    | b301     | GPU:none;FTP   |
+| 222.195.151.170 | 9015       | RAM:128G, CPU:2.3GHz*40, GPU:TESLA K40c 11G *1 | ouc-15    | b301     | LY,ZTG         |
+| 222.195.151.170 | 9028       | RAM:32G, CPU:3.5GHz*8, GPU:1080Ti 11G *2       | ouc-28    | b301     | LJX,LJH        |
+| 222.195.151.170 | 9029       | RAM:32G, CPU:3.5GHz*8, GPU:2080 8G *2          | ouc-29    | b301     | YYW,someone    |
+| 222.195.151.66  | 9010       | RAM:32G, CPU:3.3GHz*4, GPU:TITAN X 12G         | ouc-10    | b301     | Aman,Israel    |
+| 222.195.151.66  | 9018       | RAM:32G, CPU:3.5GHz*8, GPU:1080Ti 11G *2       | ouc-18    | b301     | ZZD,LWX        |
+| 222.195.151.66  | 9019       | RAM:32G, CPU:3.5GHz*8, GPU:1080Ti 11G *2       | ouc-19    | b301     | SCX,Sadia      |
+|                 | 9055       |                                                |           |          | SQY,ZQQ,HF,GYH |
 
 !!!  port for transporting files is 91-- ,NOT 90--
 
-传文件的端口是91--，选的协议是sftp。
+**传文件的端口是91--，选的协议是sftp。**
 
-# 2、登录服务器login
+> 因为github图床的原因，文中图似乎经常不显示。如不显示，可在`C:\Windows\System32\drivers\etc\hosts`文件的末尾添加如下内容：
+>
+> `199.232.4.133  	raw.githubusercontent.com`
+>
+> hosts文件需要电脑管理员才能更改。管理员登陆状态下可以把原来hosts文件命名为hosts1，然后在桌面复制原来hosts内容写入文件，注意把后缀txt去掉，然后拖入etc文件中。如不能正确更改hosts，请百度其他方法。此时图就可以正常显示了。
+>
+> 或者在CSDN上查看： https://blog.csdn.net/hancoder/article/details/88803079 
+
+
+
+# 2、login
 
 **2.1 Find remote connection**
+
+电脑中搜索桌面连接。或者在微软商店里搜远程桌面，道理都是一样的
+
 ![](https://raw.githubusercontent.com/FermHan/tuchuangsimi/master/20190325172634.png?token=AkTVJfvkXHdCyhSbXbtS6iokfCOR6xZNks5cmJ8MwA%3D%3D)
 
 **2.2 Type in IP:port**
+
+输入IP:port，如`222.195.151.170:6666`
+
 ![](https://raw.githubusercontent.com/FermHan/tuchuangsimi/master/20190325172652.png?token=AkTVJYakMJzCIiVJDfjlIcg5KLcv0mctks5cmJ8owA%3D%3D)
 
+
+
 **2.3 Type in username and password**
+
+session模式选择Xorg（个别机器选sesman-Xvnc），然后输入账号`ouc-机器后两位id`，密码`b301`
 
 ![](https://raw.githubusercontent.com/FermHan/tuchuangsimi/master/20190325135817.png?token=AkTVJVynPSWj1sb4ZEbO8wRyjpg_8P4cks5cmG46wA%3D%3D)
 
 **2.4 Once in the system, modify someone.txt to note your name and usage time.And you can put your personal files in directory  /home/ouc-xx/**在home目录下创建自己的文件夹
+
+进去后，最好在桌面上备注好你的名字以及使用时间。
+
 ![](https://raw.githubusercontent.com/FermHan/tuchuangsimi/master/20190325144734.png?token=AkTVJRoQTQFVopFyApR5WI9oEZziwdXtks5cmHnIwA%3D%3D)
 
-**2.5 Before you run the code, please type in  ` nvidia-smi ` in the terminal to make sure there's no another user.**(在你正式跑代码之前，请输入`nvidia-smi`查看有没有其他用户在跑程序（通过红框部分看）)。
+**2.5 Before you run the code, please type in  ` nvidia-smi ` in the terminal to make sure there's no another user.**(在你正式跑代码之前，请输入`nvidia-smi`查看有没有其他用户在跑程序（通过红框部分看）)。如果中间的显存占用率只有几十MB，那么就说明没人在跑程序。
 
 ![](https://raw.githubusercontent.com/FermHan/tuchuangsimi/master/20190325150409.png?token=AkTVJdMwtfgMAto3CRd4hvoScKzyrl_kks5cmH2rwA%3D%3D)
 
@@ -59,7 +102,7 @@ nvidia-smi参数解释：
 - Compute M：计算模式；
 ```
 
-# 3、Use python and tensorflow
+#  3、python-and-tensorflow
 
 ### 3.1 First and Foremost：`nvidia-smi`
 
@@ -83,6 +126,7 @@ nvidia-smi参数解释：
 # How to create a new environment创建环境
 conda create -n YOURENAME python=PYTHONVERSION
 # 如conda create -n hanfeng python=3.6。可以指定python版本，重要的是指定python版本。名称任意，推荐自己名字。anaconda3上也可安装python2.7。创建完可在/home/Anaconda3/env/YOURNAME/python目录下找到你的python
+# 如遇到权限问题，可以尝试先执行如 sudo chown -R ouc-19:ouc-19 /home/ouc-19/anaconda3
 
 # 创建完自己的环境后，接下来一切操作都是在【进入自己创建的环境】的基础上进行的，下面语句是进入自己环境的方式，二选一。注：若使用python，但凡打开终端，第一步都该的进入自己的环境，否则操作都不是针对自己的环境的。
 source activate YOURENAME 
@@ -148,13 +192,13 @@ python -m pip install FILE下载的文件
 
   使用`which pip3`或`which pip`可以查看默认的pip3和pip在哪里。如图，pip3在/usr/bin目录下，pip在anaconda3/bin目录下
 
-![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190621164105.png)
+  ![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190621164105.png)
 
-​		输入`gedit /usr/local/pip3`可以打开pip3修改第一行，修改为自己python的路径以后pip3以后默认的安装的就是你的python了。
+  输入`gedit /usr/local/pip3`可以打开pip3修改第一行，修改为自己python的路径以后pip3以后默认的安装的就是你的python了。
 
-![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190621164221.png)
+  ![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190621164221.png)
 
-​		但是上面只是介绍原理，实例使用中最实用的还是直接使用`python -m pip install 在线/离线包`，相当于指定了为哪个python安装包。
+  但是上面只是介绍原理，实例使用中最实用的还是直接使用`python -m pip install 在线/离线包`，相当于指定了为哪个python安装包。
 
 ```PYTHON
 conda activate YOURENAME # or：source activate YOURENAME
@@ -191,7 +235,7 @@ archive下是anaconda安装包
 
 - 添加源：一般常用的是中科大源和清华源
 
-```python 
+``` python 
 #输入gedit ~/.condarc复制以下内容后保存：
 channels:
   - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
@@ -202,6 +246,7 @@ show_channel_urls: true
 ```
 
 - 删除源：conda config --remove-key channels
+
 
 ### 3.4 navigator
 
@@ -217,15 +262,21 @@ in the terminal to open NAVIGATOR, and choose python from NAVIGATOR.
 
 
 
-# 4、How to transfer files 传文件
+# 4、transfer-files：Xftp
 
 如果需要传文件，无需去机房拷贝，用Xftp传即可，文件可在网上下载破解版。
 
 You can install **Xftp** in windows to transfer files. # windows安装xftp软件
 
+Xftp+Xshell下载地址：填写姓名邮件后开始下载（需要科学上网）：https://www.netsarang.com/zh/free-for-home-school/
+
+
+
 Protocol:sftp  # 协议选sftp
 
 port is NOT 90-- BUT 91--  # 端口号是91--，而不是原来的90--
+
+文件--新建--填写主机、协议SFTP、端口号`91--`（注意不是90）、账号、密码---连接。
 
 ![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190531220350.png)![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190531222935.png)
 
@@ -233,13 +284,52 @@ port is NOT 90-- BUT 91--  # 端口号是91--，而不是原来的90--
 
 ![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190531220819.png)
 
-# 5、只使用命令行不使用界面：Xshell
+# 5、查看文件、修改文件：UltraEdit
 
-windows的远程的确有时候很卡，目前我也不知道该如何解决，或许在ubuntu18没有解决方案。至于为什么卡还在使用这个远程的原因请看6.2。
+在此给大家推荐一个软件UltraEdit：这是一个文本编辑软件，类似于windows下的记事本。想必大家很喜欢用ubuntu下的gedit命令，因为vim命令太难了。而UltraEdit是比gedit还要好用的一个文本编辑器。
+
+UltraEdit有windows+mac+ubuntu版本，所以你在任何系统下都可以下载这个软件
+
+首先去UltraEdit官网下载UltraEdit，购(po)买(jie)后点击菜单栏中的FTP，点击从FTP打开。
+
+![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20191025145530.png)
+
+然后像xftp一样填写信息，填写后点击确定，再点击链接，就可以看到文件了。
+
+![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20191025145928.png)
+
+![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20191025150213.png)
+
+![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20191025150724.png)
+
+我们在上面解决了传文件、看文件、修改文件的需求，我们跑程序时候还有使用命令行，xshell就是命令行工具
+
+# 6、命令行工具：Xshell
+
+windows的远程的确有时候很卡，目前我也不知道该如何解决，或许在ubuntu18没有解决方案。至于为什么卡还在使用这个远程的原因请看7.1。
+
+ssh命令的简单学习：
+
+```BASH
+pwd #打印当前目录
+cd 目录 #转换目录，分为相对路径和绝对路径，第一位是/的是绝对路径
+wget 连接 #下载文件
+ls #查看当前目录文件
+mkdir #创建目录
+vim #编辑文件
+# vim分为命令模式，插入模式和底线模式。了解前两个即可
+# 刚进去的适合是命令模式，此时只能查看文件，按h左j下k上l右；按i进入插入模式编辑文件
+# 编辑好后按Esc，然后输入:wq代表保存退出，q！代表不保存退出
+# 补充：命令模式下：u撤销 Ctrl+r取消撤销 x删除当前光标字符 X是向前删 x是向后删
+# 其他命令自己学习
+```
+
+
 
 这里提高两种暂时的解决方案。
 
 - 第一种方法是开teamviewer。但teamviewer与远程界面有时候有些矛盾，这可能是安的桌面的问题。所有teamviewer不一定100%有效。
+
 - 第二种方法是用ssh命令行模式
 
 > 若链接ssh不成功，可先安装：
@@ -254,7 +344,7 @@ windows的远程的确有时候很卡，目前我也不知道该如何解决，�
 
 破解xshell地址：https://blog.csdn.net/u011622631/article/details/88991941
 
-安装后，打开xshell，新建链接如图，端口为91--
+安装后，打开xshell，新建链接如图，协议选ssh，其余内容与xftp内容一致。端口为91--
 
 ![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190531232754.png)
 
@@ -268,53 +358,69 @@ windows的远程的确有时候很卡，目前我也不知道该如何解决，�
 
 ![](https://raw.githubusercontent.com/FermHan/tuchuang/master/20190605152403.png)
 
-# 6、What's more
+# 7、重装系统（非常不建议）
 
-### 6.1 为什么要安装小老鼠这个界面？
+首先说明：非常不建议自己重装系统。即使要重装系统，也要负责地把需要的各项都装好，不给别人添麻烦。
 
-因为teamviewer总会出现商业版问题，所以无奈选择远程连接的方式，如果你使用时间较长，可以试着连teamviewer使用。
+重装系统后需要把第7部分的内容全部配置好
 
-因为ubuntu不好实现远程连接，必须通过安装小老鼠界面间接控制ubuntu。ubuntu16可能有解决方案，但ubuntu18较难解决，而我们的ubuntu当初安装的是18版本，所以尽管小老鼠界面不美观，但还得接着使用。
+### 7.1 安装系统
 
-- ubuntu18配置远程参考此链接的第二个方法https://blog.csdn.net/star2523/article/details/81152890
-- 在ubuntu16下可能存在完美的解决方式请参考：https://blog.csdn.net/qq_37674858/article/details/80931254 ， https://www.cnblogs.com/xuliangxing/p/7642650.html
-- 原来服务器配置人员的博客：https://blog.csdn.net/zhouxiaowei1120/article/details/80872919
+如果真有需要安装系统，比较推荐安装ubuntu16，因为ubuntu16对远程桌面支持比较好。要保证用户名密码与原来设定一致。
 
-> 如有在远程上打不开终端，可以使用sudo apt-get remove gnome*
+### 7.2 设置IP
 
-### 6.2 如何安装cuda，显卡驱动等
+重新配置IP以便可以远程连接  https://blog.csdn.net/hancoder/article/details/102881903 
+
+### 7.3 安装cuda，显卡驱动等
 
 参考链接 https://blog.csdn.net/hancoder/article/details/86634415
 
-### 6.3 重装服务器系统后需要做什么
+### 7.4 远程内容
 
-- 配置显卡驱动，cuda，cudnn
-- 重新配置IP以便可以远程连接
-- 安装ssh以便文件传输：
+- 配置远程桌面： https://blog.csdn.net/hancoder/article/details/102882153 
+- 安装ssh以便文件传输： https://blog.csdn.net/hancoder/article/details/102881903 
 
-​	`apt-get install openssh-server`
+```BASH
+一般只需要进行：
+apt-get install openssh-server
+service ssh restart
 
-​	vim /etc/ssh/sshd_config
+特殊情况可以修改文件：
+vim /etc/ssh/sshd_config
+将PermitRootLoginwithout-password注释，                                
+添加一行： PermitRootLoginyes
+```
 
-​	将PermitRootLoginwithout-password注释，                                
+安装anaconda
 
-​	添加一行： PermitRootLoginyes
+# 8、What's-more
 
-​	`service ssh restart`
+### 8.1 为什么要安装小老鼠这个界面？
 
-远程连接方式可看上面小老鼠问题
+因为teamviewer总会出现商业版问题，所以无奈选择远程连接的方式，如果你使用时间较长，可以试着连teamviewer使用。
 
-### 6.4 一些其他内容
+因为ubuntu不好实现远程连接，必须通过安装小老鼠界面间接控制ubuntu。ubuntu16有很好的有解决方案（无奈当初别人装的是18系统），而ubuntu18因为版本原因远程桌面的选择很少。所以尽管小老鼠界面不美观，但还得接着使用。
 
-6.5.1 配置环境变量的文件Some environment variables are configured in `~/.bashrc`
+- ubuntu18配置远程参考此链接的第二个方法https://blog.csdn.net/star2523/article/details/81152890
 
-6.5.2 please debug your code on your PC to save server resources.
+- 在ubuntu16下可能存在完美的解决方式请参考：https://blog.csdn.net/qq_37674858/article/details/80931254 ， https://www.cnblogs.com/xuliangxing/p/7642650.html
 
-6.5.3 If your server resources are insufficient, please contact HAN. There may be servers unallocated for you.
+- 原来服务器配置人员的博客：https://blog.csdn.net/zhouxiaowei1120/article/details/80872919
 
-6.5.4 以后更新尽量在此github更新IP等内容，账号即OUCvisionLab，密码可问管理员索要。
+> 注：安桌面的`echo xfce4-session >~/.xsession`命令是向home目录的`.xsession`文件末尾写入xfce4-session
 
-6.5.5 Maybe you want to install Anaconda2.To be honest, it's not usually used, because python2.7 has been involved in Anaconda3. If you think about it, what is noteworthy is that when you install anaconda2,
+### 8.2 一些其他内容
+
+8.2.1 配置环境变量的文件Some environment variables are configured in `~/.bashrc`
+
+8.2.2 please debug your code on your PC to save server resources.
+
+8.2.3 If your server resources are insufficient, please contact HAN. There may be servers unallocated for you.
+
+8.2.4 以后更新尽量在此github更新IP等内容，账号即OUCvisionLab，密码可问管理员索要。
+
+8.2.5 Maybe you want to install Anaconda2.To be honest, it's not usually used, because python2.7 has been involved in Anaconda3. If you think about it, what is noteworthy is that when you install anaconda2,
 
 > Anaconda2 will now be installed into this location:home/xx/anaconda2
 >
@@ -331,3 +437,7 @@ don't press ENTER, you should type in your personal directory such as : `/home/o
 > Do you with the installer to prepend the Anaconda2 install location to PATH in your /home/ouc/.bashrc ?[yes|no]
 
 please type in `no`
+
+### 7.5 contact me
+
+QQ：553736044@qq.com
