@@ -4,7 +4,7 @@
 
 ## OUC Theory Group 
 
-2019年11月09日 修改
+*2019年11月09日 修改*
 
 |[小组管理规定](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/GroupRules.md)|[小组组会制度](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/MeetingRules.md)|[服务器使用方法](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/ServiceGuide.md)|[如何选论文及读论文](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/PaperReading.md)
 |:-:|:-:|:-:|:-:|
