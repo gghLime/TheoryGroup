@@ -7,7 +7,7 @@
 
 *2020 年 9 月 修改*
 
-|[小组管理规定](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/GroupRules.md)|[小组组会制度](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/MeetingRules.md)|[服务器使用方法](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/ServiceGuide)|[如何选论文及读论文](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/PaperReading.md)
+|[小组管理规定](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/GroupRules.md)|[小组组会制度](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/MeetingRules.md)|[服务器使用方法](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/ServiceGuide.md)|[如何选论文及读论文](https://github.com/OUCTheoryGroup/TheoryGroup/blob/master/files/PaperReading.md)
 |:-:|:-:|:-:|:-:|
 
 **TheoryGroup 小组成员**
